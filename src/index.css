@@ -1,0 +1,312 @@
+@import "tailwindcss";
+
+:root {
+  --accent: #7c6cff;
+  --accent-soft: rgba(124, 108, 255, 0.16);
+  --accent-ink: #ffffff;
+
+  --bg: #0b0d12;
+  --surface: #12151d;
+  --surface-2: #171b25;
+  --surface-3: #1e2331;
+  --line: rgba(255, 255, 255, 0.08);
+  --text: #eef1f8;
+  --muted: #97a0b5;
+}
+
+[data-theme="light"] {
+  --bg: #f2f3f8;
+  --surface: #ffffff;
+  --surface-2: #f7f8fc;
+  --surface-3: #eceef6;
+  --line: rgba(12, 16, 32, 0.08);
+  --text: #131722;
+  --muted: #667089;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #05070c;
+  color: var(--text);
+  font-family: "Google Sans", "Product Sans", "Inter", system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+  overscroll-behavior: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.app-scroll {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+/* ---------- animations ---------- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes sheetUp {
+  from {
+    transform: translateY(101%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes pop {
+  0% {
+    transform: scale(0.85);
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+@keyframes ringPulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--accent-soft);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(0, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+.anim-fade-up {
+  animation: fadeUp 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.anim-fade-in {
+  animation: fadeIn 0.3s ease both;
+}
+.anim-sheet {
+  animation: sheetUp 0.34s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+.anim-pop {
+  animation: pop 0.34s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+.anim-floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+.pulse-ring {
+  animation: ringPulse 2.2s ease-out infinite;
+}
+
+.press {
+  transition: transform 0.14s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.14s ease,
+    background-color 0.2s ease;
+}
+.press:active {
+  transform: scale(0.96);
+}
+
+.glass {
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+/* ---------- top-tier micro-interactions ---------- */
+@keyframes xpFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.7) rotate(-6deg);
+  }
+  18% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.06) rotate(3deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-52px) scale(0.95) rotate(-4deg);
+  }
+}
+.xp-float {
+  animation: xpFloat 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes toastIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.9);
+  }
+  55% {
+    transform: translateY(-2px) scale(1.03);
+  }
+  80% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+}
+.toast-in {
+  animation: toastIn 2.6s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+
+@keyframes levelupPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(30px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05) translateY(-4px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+.levelup-pop {
+  animation: levelupPop 0.55s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+
+@keyframes springIn {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+  }
+  60% {
+    transform: translateY(-3px) scale(1.005);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+.anim-spring {
+  animation: springIn 0.5s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+
+@keyframes flameFlicker {
+  0%,
+  100% {
+    transform: scale(1) rotate(-4deg);
+  }
+  40% {
+    transform: scale(1.18) rotate(4deg);
+  }
+  70% {
+    transform: scale(1.05) rotate(-2deg);
+  }
+}
+.flame-flicker {
+  animation: flameFlicker 1.6s ease-in-out infinite;
+  transform-origin: 50% 80%;
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 var(--accent-soft);
+  }
+  50% {
+    box-shadow: 0 0 24px 4px var(--accent-soft);
+  }
+}
+.glow-pulse {
+  animation: glowPulse 2.6s ease-in-out infinite;
+}
+
+@keyframes badgePop {
+  0% {
+    transform: scale(0.5) rotate(-12deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.15) rotate(4deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+.badge-pop {
+  animation: badgePop 0.45s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+
+@keyframes shineSweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+.shine {
+  background-image: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: shineSweep 3.2s linear infinite;
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-8deg);
+  }
+  75% {
+    transform: rotate(8deg);
+  }
+}
+.wiggle {
+  animation: wiggle 0.5s ease-in-out;
+}
